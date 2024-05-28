@@ -5,29 +5,28 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.api.response.common.code.status.ErrorStatus;
-import umc.spring.service.RegionService.RegionQueryService;
-import umc.spring.validation.annotation.ExistRegion;
+import umc.spring.service.StoreService.StoreQueryService;
+import umc.spring.validation.annotation.ExistStore;
 
 @Component
 @RequiredArgsConstructor
-public class RegionsExistValidator implements ConstraintValidator<ExistRegion, Long> {
-    // ExistCategories 어노테이션에 대한 로직을 담을 것이며 검증 대상이 List<Long>임을 명시
+public class StoresExistValidator implements ConstraintValidator<ExistStore, Long> {
 
-    private final RegionQueryService regionQueryService;
+    private final StoreQueryService storeQueryService;
 
     @Override
-    public void initialize(ExistRegion constraintAnnotation) {
+    public void initialize(ExistStore constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
 
-        boolean isValid = regionQueryService.isExistRegion(value);
+        boolean isValid = storeQueryService.isExistStore(value);
 
         if (!isValid){
             context.disableDefaultConstraintViolation();
-            context.buildConstraintViolationWithTemplate(ErrorStatus.REGION_NOT_FOUND.toString()).addConstraintViolation();
+            context.buildConstraintViolationWithTemplate(ErrorStatus.STORE_NOT_FOUND.toString()).addConstraintViolation();
         }
 
         return isValid;

@@ -11,17 +11,12 @@ import umc.spring.api.response.common.code.status.ErrorStatus;
 import umc.spring.converter.MemberConverter;
 import umc.spring.converter.MemberPreferConverter;
 import umc.spring.converter.StoreConverter;
-import umc.spring.domain.FoodCategory;
-import umc.spring.domain.Member;
-import umc.spring.domain.Region;
-import umc.spring.domain.Store;
+import umc.spring.domain.*;
 import umc.spring.domain.mapping.MemberPrefer;
 import umc.spring.exception.handler.FoodCategoryHandler;
 import umc.spring.exception.handler.RegionHandler;
-import umc.spring.repository.FoodCategoryRepository;
-import umc.spring.repository.MemberRepository;
-import umc.spring.repository.RegionRepository;
-import umc.spring.repository.StoreRepository;
+import umc.spring.exception.handler.StoreHandler;
+import umc.spring.repository.*;
 import umc.spring.service.MemberService.MemberCommandService;
 
 import java.util.List;
@@ -34,6 +29,7 @@ public class StoreCommandServiceImpl implements StoreCommandService {
     // 나머지 요청에 대한 비즈니스 로직 처리
     private final RegionRepository regionRepository;
     private final StoreRepository storeRepository;
+    private final ReviewRepository reviewRepository;
 
     @Override
     @Transactional // 모든 작업들이 성공해야만 최종적으로 데이터베이스에 반영하도록 한다.
