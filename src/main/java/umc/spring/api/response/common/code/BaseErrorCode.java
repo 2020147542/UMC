@@ -1,4 +1,4 @@
-package umc.spring.apiFormat.code;
+package umc.spring.api.response.common.code;
 
 public interface BaseErrorCode {
     public ErrorReasonDTO getReason();

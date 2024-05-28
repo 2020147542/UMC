@@ -1,4 +1,4 @@
-package umc.spring.apiFormat.code;
+package umc.spring.api.response.common.code;
 
 import lombok.Builder;
 import lombok.Getter;

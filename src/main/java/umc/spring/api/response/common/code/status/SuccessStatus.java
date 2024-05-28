@@ -1,10 +1,10 @@
-package umc.spring.apiFormat.code.status;
+package umc.spring.api.response.common.code.status;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import umc.spring.apiFormat.code.BaseCode;
-import umc.spring.apiFormat.code.ReasonDTO;
+import umc.spring.api.response.common.code.BaseCode;
+import umc.spring.api.response.common.code.ReasonDTO;
 
 @Getter
 @AllArgsConstructor

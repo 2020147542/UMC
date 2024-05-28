@@ -1,4 +1,4 @@
-package umc.spring.web.response;
+package umc.spring.api.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

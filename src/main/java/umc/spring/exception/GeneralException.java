@@ -2,8 +2,8 @@ package umc.spring.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import umc.spring.apiFormat.code.BaseErrorCode;
-import umc.spring.apiFormat.code.ErrorReasonDTO;
+import umc.spring.api.response.common.code.BaseErrorCode;
+import umc.spring.api.response.common.code.ErrorReasonDTO;
 
 @Getter
 @AllArgsConstructor

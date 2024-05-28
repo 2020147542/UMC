@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import umc.spring.apiFormat.ApiResponse;
-import umc.spring.apiFormat.code.ErrorReasonDTO;
-import umc.spring.apiFormat.code.status.ErrorStatus;
+import umc.spring.api.response.common.ApiResponse;
+import umc.spring.api.response.common.code.ErrorReasonDTO;
+import umc.spring.api.response.common.code.status.ErrorStatus;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -37,8 +38,10 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     }
 
 
+    // advice에서 MethodArgumentNotValidException를 감지하게 됩니다.
+    @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException e, HttpHeaders headers, HttpStatus status, WebRequest request) {
+            MethodArgumentNotValidException e, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
         Map<String, String> errors = new LinkedHashMap<>();
 

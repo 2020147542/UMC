@@ -1,10 +1,10 @@
-package umc.spring.apiFormat.code.status;
+package umc.spring.api.response.common.code.status;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import umc.spring.apiFormat.code.BaseErrorCode;
-import umc.spring.apiFormat.code.ErrorReasonDTO;
+import umc.spring.api.response.common.code.BaseErrorCode;
+import umc.spring.api.response.common.code.ErrorReasonDTO;
 
 @Getter
 @AllArgsConstructor
@@ -22,7 +22,13 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // 예시,,,
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다."),
-    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "테스트 중");
+    TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "테스트 중"),
+
+    // FoodCategory Error
+    FOOD_CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "FOOD_CATEGORY4001", "음식 카테고리가 없습니다."),
+
+    // Store Error
+    STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE_4001","가게가 없습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
