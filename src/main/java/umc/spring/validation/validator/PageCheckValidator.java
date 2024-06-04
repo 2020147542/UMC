@@ -5,9 +5,7 @@ import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.api.response.common.code.status.ErrorStatus;
-import umc.spring.service.MemberService.MemberQueryService;
 import umc.spring.validation.annotation.CheckPage;
-import umc.spring.validation.annotation.ExistMission;
 
 @Component
 @RequiredArgsConstructor
@@ -21,11 +19,13 @@ public class PageCheckValidator implements ConstraintValidator<CheckPage, Intege
     @Override
     public boolean isValid(Integer value, ConstraintValidatorContext context) {
 
-        if (value < 0){
+        if (value < 0) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(ErrorStatus.PAGE_ERROR.toString()).addConstraintViolation();
 
             return false;
+        } else if (value == 0) {
+
         }
 
         return true;

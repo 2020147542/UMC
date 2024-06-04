@@ -46,6 +46,7 @@ public class StoreRestController {
         return ApiResponse.onSuccess(StoreConverter.toAddResultDTO(store));
     }
 
+
     @PostMapping("/{storeId}/reviews")
     public ApiResponse<ReviewResponse.AddResultDTO> addReview(
             @ExistStore @PathVariable("storeId") Long storeId,
@@ -55,6 +56,7 @@ public class StoreRestController {
         Review review = storeCommandService.addReview(reviewRequest, userId, storeId);
         return ApiResponse.onSuccess(ReviewConverter.toAddResultDTO(review));
     }
+
 
     @PostMapping("/{storeId}/missions")
     public ApiResponse<MissionResponse.AddResultDTO> addMission(
@@ -75,11 +77,12 @@ public class StoreRestController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
     @Parameters({
-            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!")
+            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!"),
+            @Parameter(name = "page", description = "페이지 번호, 0부터 시작합니다. requestParam입니다!")
     })
     public ApiResponse<ReviewResponse.ReviewListDTO> getReviews(
             @ExistStore @PathVariable("storeId") Long storeId,
-            @CheckPage @RequestParam Integer page
+            @CheckPage @RequestParam(name="page") Integer page
     ){
         Page<Review> reviewPage =  storeQueryService.getReviewList(storeId, page);
         return ApiResponse.onSuccess(ReviewConverter.toReviewListDTO(reviewPage));
@@ -95,11 +98,12 @@ public class StoreRestController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
     @Parameters({
-            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!")
+            @Parameter(name = "storeId", description = "가게의 아이디, path variable 입니다!"),
+            @Parameter(name = "page", description = "페이지 번호, 0부터 시작합니다. requestParam입니다!")
     })
     public ApiResponse<MissionResponse.MissionListDTO> getMissions(
             @ExistStore @PathVariable("storeId") Long storeId,
-            @CheckPage @RequestParam Integer page
+            @CheckPage @RequestParam(name="page") Integer page
     ){
         Page<Mission> missionPage =  storeQueryService.getMissionList(storeId, page);
         return ApiResponse.onSuccess(MissionConverter.toMissionListDTO(missionPage));

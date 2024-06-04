@@ -2,7 +2,6 @@ package umc.spring.validation.annotation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import umc.spring.validation.validator.CategoriesExistValidator;
 import umc.spring.validation.validator.PageCheckValidator;
 
 import java.lang.annotation.*;
@@ -16,5 +15,4 @@ public @interface CheckPage {
     String message() default "페이지 관련 오류가 존재합니다.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-    int pageNumber() default 1;
 }

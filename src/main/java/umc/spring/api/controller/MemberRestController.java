@@ -53,6 +53,7 @@ public class MemberRestController {
         return ApiResponse.onSuccess("mission started");
     }
 
+
     @PatchMapping("/missions/{missionId}")
     @Operation(summary = "진행중인 미션 완료로 바꾸기 API",description = "진행중인 미션을 완료상태로 바꾸는 API입니다.")
     @ApiResponses({
@@ -71,6 +72,7 @@ public class MemberRestController {
         return ApiResponse.onSuccess("mission status changed");
     }
 
+
     @GetMapping("/reviews")
     @Operation(summary = "내가 작성한 리뷰 목록 조회 API",description = "내가 작성한 리뷰들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
     @ApiResponses({
@@ -79,13 +81,17 @@ public class MemberRestController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0부터 시작합니다. requestParam입니다!")
+    })
     public ApiResponse<ReviewResponse.ReviewListDTO> getMyReviews(
-            @CheckPage @RequestParam Integer page
+            @CheckPage @RequestParam(name="page") Integer page
     ){
         Page<Review> reviewPage =  memberQueryService.getMemberReviews(1L, page);
 
         return ApiResponse.onSuccess(ReviewConverter.toReviewListDTO(reviewPage));
     }
+
 
     @GetMapping("/missions/progress")
     @Operation(summary = "내가 진행중인 미션 목록 조회 API",description = "내가 진행하는 미션들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
@@ -95,12 +101,17 @@ public class MemberRestController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0부터 시작합니다. requestParam입니다!")
+    })
     public ApiResponse<MissionResponse.MissionListDTO> getMyProgressMissions(
-            @CheckPage @RequestParam Integer page
+            @CheckPage @RequestParam(name="page") Integer page
     ){
         Page<MemberMission> missionPage = memberQueryService.getMemberProgressMission(1L, page);
         return ApiResponse.onSuccess(MissionConverter.toMissionListDTOFromMemberMission(missionPage));
     }
+
+
 
     @GetMapping("/missions/complete")
     @Operation(summary = "내가 완료한 미션 목록 조회 API",description = "내가 완료한 미션들의 목록을 조회하는 API이며, 페이징을 포함합니다. query String 으로 page 번호를 주세요")
@@ -110,8 +121,11 @@ public class MemberRestController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH004", description = "acess 토큰 만료",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "AUTH006", description = "acess 토큰 모양이 이상함",content = @Content(schema = @Schema(implementation = ApiResponse.class))),
     })
+    @Parameters({
+            @Parameter(name = "page", description = "페이지 번호, 0부터 시작합니다. requestParam입니다!")
+    })
     public ApiResponse<MissionResponse.MissionListDTO> getMyCompleteMissions(
-            @CheckPage @RequestParam Integer page
+            @CheckPage @RequestParam(name="page") Integer page
     ){
         Page<MemberMission> missionPage = memberQueryService.getMemberCompleteMission(1L, page);
         return ApiResponse.onSuccess(MissionConverter.toMissionListDTOFromMemberMission(missionPage));
