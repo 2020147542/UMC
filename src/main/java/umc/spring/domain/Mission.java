@@ -17,14 +17,24 @@ public class Mission extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private Integer reward;
 
+    @Column(nullable = false)
     private LocalDate deadline;
 
+    @Column(length = 100)
     private String missionSpec;
 
     // store: mission = 1: n
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;
+
+    public void setStore(Store store) {
+        this.store = store;
+    }
 }
