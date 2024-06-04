@@ -32,7 +32,10 @@ public enum ErrorStatus implements BaseErrorCode {
     STORE_NOT_FOUND(HttpStatus.NOT_FOUND, "STORE_4001","가게가 없습니다!"),
 
     // Misson Error
-    MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION_4001","미션이 없습니다!");
+    MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION_4001","미션이 없습니다!"),
+
+    // Page Error
+    PAGE_ERROR(HttpStatus.BAD_REQUEST, "PAGE_400","페이지 범위가 잘못되었습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

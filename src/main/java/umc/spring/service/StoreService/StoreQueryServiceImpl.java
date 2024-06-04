@@ -6,9 +6,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.spring.api.response.ReviewResponse;
 import umc.spring.api.response.common.code.status.ErrorStatus;
+import umc.spring.domain.Mission;
 import umc.spring.domain.Store;
 import umc.spring.domain.mapping.Review;
 import umc.spring.exception.handler.StoreHandler;
+import umc.spring.repository.MissionRepository;
 import umc.spring.repository.ReviewRepository;
 import umc.spring.repository.StoreRepository;
 
@@ -21,6 +23,7 @@ public class StoreQueryServiceImpl implements StoreQueryService {
 
     private final StoreRepository storeRepository;
     private final ReviewRepository reviewRepository;
+    private final MissionRepository missionRepository;
 
     // get 요청에 대한 비즈니스 로직 처리
     @Override
@@ -40,7 +43,15 @@ public class StoreQueryServiceImpl implements StoreQueryService {
                 () -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND)
         );
 
-        Page<Review> StorePage = reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
-        return StorePage;
+        return reviewRepository.findAllByStore(store, PageRequest.of(page, 10));
+    }
+
+    @Override
+    public Page<Mission> getMissionList(Long storeId, Integer page){
+        Store store = storeRepository.findById(storeId).orElseThrow(
+                () -> new StoreHandler(ErrorStatus.STORE_NOT_FOUND)
+        );
+
+        return missionRepository.findAllByStore(store, PageRequest.of(page, 10));
     }
 }
