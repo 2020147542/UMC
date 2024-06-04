@@ -3,11 +3,8 @@ package umc.spring.converter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.api.request.MissionRequest;
-import umc.spring.api.request.ReviewRequest;
 import umc.spring.api.response.MissionResponse;
-import umc.spring.api.response.ReviewResponse;
 import umc.spring.domain.Mission;
-import umc.spring.domain.Review;
 
 import java.time.LocalDateTime;
 
@@ -22,7 +19,7 @@ public class MissionConverter {
                 .build();
     }
 
-    public static Mission toMission(MissionRequest.AddDto addRequest) {
+    public static Mission toMission(MissionRequest.MissionAddDto addRequest) {
 
         return Mission.builder()
                 .name(addRequest.getName())

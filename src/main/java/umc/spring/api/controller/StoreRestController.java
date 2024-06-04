@@ -10,12 +10,12 @@ import umc.spring.api.response.MissionResponse;
 import umc.spring.api.response.ReviewResponse;
 import umc.spring.api.response.StoreResponse;
 import umc.spring.api.response.common.ApiResponse;
+import umc.spring.converter.MissionConverter;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.converter.StoreConverter;
 import umc.spring.domain.Mission;
 import umc.spring.domain.Review;
 import umc.spring.domain.Store;
-import umc.spring.service.ReviewService.ReviewCommandService;
 import umc.spring.service.StoreService.StoreCommandService;
 import umc.spring.validation.annotation.ExistRegion;
 import umc.spring.validation.annotation.ExistStore;
@@ -30,7 +30,7 @@ public class StoreRestController {
     @PostMapping("/{regionId}")
     public ApiResponse<StoreResponse.AddResultDTO> addStore(
             @ExistRegion @PathVariable Long regionId,
-            @RequestBody @Valid StoreRequest.AddDto addRequest
+            @RequestBody @Valid StoreRequest.StoreAddDto addRequest
     ){
         Store store = storeCommandService.addStore(addRequest, regionId);
         return ApiResponse.onSuccess(StoreConverter.toAddResultDTO(store));
@@ -39,7 +39,7 @@ public class StoreRestController {
     @PostMapping("/{storeId}/review")
     public ApiResponse<ReviewResponse.AddResultDTO> addReview(
             @ExistStore @PathVariable Long storeId,
-            @RequestBody @Valid ReviewRequest.AddDto reviewRequest
+            @RequestBody @Valid ReviewRequest.ReviewAddDto reviewRequest
     ){
         Long userId = 1L;
         Review review = storeCommandService.addReview(reviewRequest, userId, storeId);
@@ -49,8 +49,9 @@ public class StoreRestController {
     @PostMapping("/{storeId}/mission")
     public ApiResponse<MissionResponse.AddResultDTO> addMission(
             @ExistStore @PathVariable Long storeId,
-            @RequestBody @Valid MissionRequest.AddDto missionRequest
+            @RequestBody @Valid MissionRequest.MissionAddDto missionRequest
     ){
-        Mission mission = storeCommandService.add
+        Mission mission = storeCommandService.addMission(missionRequest, storeId);
+        return ApiResponse.onSuccess(MissionConverter.toAddResultDTO(mission));
     }
 }

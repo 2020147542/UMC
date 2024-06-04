@@ -7,7 +7,7 @@ import lombok.Getter;
 public class ReviewRequest {
 
     @Getter
-    public static class AddDto{
+    public static class ReviewAddDto {
 
         @NotBlank
         String title;
