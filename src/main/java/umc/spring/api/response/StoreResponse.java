@@ -17,4 +17,5 @@ public class StoreResponse {
         Long storeId;
         LocalDateTime createdAt;
     }
+
 }
