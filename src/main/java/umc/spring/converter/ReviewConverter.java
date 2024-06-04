@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import umc.spring.api.request.ReviewRequest;
 import umc.spring.api.response.ReviewResponse;
-import umc.spring.domain.Review;
+import umc.spring.domain.mapping.Review;
 
 import java.time.LocalDateTime;
 

@@ -10,6 +10,7 @@ import umc.spring.api.request.StoreRequest;
 import umc.spring.api.response.common.code.status.ErrorStatus;
 import umc.spring.converter.*;
 import umc.spring.domain.*;
+import umc.spring.domain.mapping.Review;
 import umc.spring.exception.handler.MemberHandler;
 import umc.spring.exception.handler.RegionHandler;
 import umc.spring.exception.handler.StoreHandler;

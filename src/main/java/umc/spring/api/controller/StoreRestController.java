@@ -14,7 +14,7 @@ import umc.spring.converter.MissionConverter;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.converter.StoreConverter;
 import umc.spring.domain.Mission;
-import umc.spring.domain.Review;
+import umc.spring.domain.mapping.Review;
 import umc.spring.domain.Store;
 import umc.spring.service.StoreService.StoreCommandService;
 import umc.spring.validation.annotation.ExistRegion;
@@ -29,7 +29,7 @@ public class StoreRestController {
 
     @PostMapping("/{regionId}")
     public ApiResponse<StoreResponse.AddResultDTO> addStore(
-            @ExistRegion @PathVariable Long regionId,
+            @ExistRegion @PathVariable("regionId") Long regionId,
             @RequestBody @Valid StoreRequest.StoreAddDto addRequest
     ){
         Store store = storeCommandService.addStore(addRequest, regionId);
@@ -38,7 +38,7 @@ public class StoreRestController {
 
     @PostMapping("/{storeId}/review")
     public ApiResponse<ReviewResponse.AddResultDTO> addReview(
-            @ExistStore @PathVariable Long storeId,
+            @ExistStore @PathVariable("storeId") Long storeId,
             @RequestBody @Valid ReviewRequest.ReviewAddDto reviewRequest
     ){
         Long userId = 1L;
@@ -46,9 +46,9 @@ public class StoreRestController {
         return ApiResponse.onSuccess(ReviewConverter.toAddResultDTO(review));
     }
 
-    @PostMapping("/{storeId}/mission")
+    @PostMapping("/{storeId}/missions")
     public ApiResponse<MissionResponse.AddResultDTO> addMission(
-            @ExistStore @PathVariable Long storeId,
+            @ExistStore @PathVariable("storeId") Long storeId,
             @RequestBody @Valid MissionRequest.MissionAddDto missionRequest
     ){
         Mission mission = storeCommandService.addMission(missionRequest, storeId);

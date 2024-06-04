@@ -18,4 +18,5 @@ public class StoreRequest {
         @Size(min = 10, max = 200)
         String description;
     }
+
 }

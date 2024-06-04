@@ -14,7 +14,7 @@ public class MissionRequest {
         @NotBlank
         String name;
 
-        @NotBlank
+        @NotNull
         Integer reward;
 
         @NotNull

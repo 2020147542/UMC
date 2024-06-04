@@ -12,6 +12,7 @@ import umc.spring.domain.enums.SocialType;
 import umc.spring.domain.mapping.MemberAgree;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.MemberPrefer;
+import umc.spring.domain.mapping.Review;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

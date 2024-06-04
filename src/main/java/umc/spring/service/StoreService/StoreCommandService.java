@@ -4,7 +4,7 @@ import umc.spring.api.request.MissionRequest;
 import umc.spring.api.request.ReviewRequest;
 import umc.spring.api.request.StoreRequest;
 import umc.spring.domain.Mission;
-import umc.spring.domain.Review;
+import umc.spring.domain.mapping.Review;
 import umc.spring.domain.Store;
 
 public interface StoreCommandService {
